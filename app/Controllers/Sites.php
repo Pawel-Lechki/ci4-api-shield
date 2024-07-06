@@ -3,43 +3,41 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use CodeIgniter\HTTP\ResponseInterface;
+use App\Models\StudentModel;
 
 class Sites extends BaseController
 {
-    private $db;
-    private $table;
+    private $studentObject;
 
     public function __construct()
     {
-        $this->db = db_connect();
-        $this->table = $this->db->table("students");
+        $this->studentObject = new StudentModel();
     }
     public function insertStudent()
     {
         $data = [
-            "name" => "Pejak Paweł",
-            "email" => "pejakpawel@wp.pl", 
-            "phone" => "123456798"
+            "name" => "Bejak Bartek",
+            "email" => "bejakbartek@vp.pl",
+            "phone" => "987654321",
         ];
 
-        if($this->table->insert($data)){
+        if($this->studentObject->insert($data))
+        {
             echo "<h3>Student created!<h3>";
         } else {
-            echo "<h3>Faild to create sudent</h3>";
-        };
+            echo "<h3>Faild to create Student!<h3>";
+        }
     }
+
     public function updateStudent() 
     {
-        $student_Id = 2;
+        $student_Id = 3;
 
         $updated_data = [
-            "email" => "pejakpawel@onet.pl"
+            "phone" => "2233445566"
         ];
 
-        if ($this->table->update($updated_data, [
-            "id" => $student_Id
-        ]))
+        if ($this->studentObject->update($student_Id, $updated_data))
         {
             echo "<h3>Student updated!<h3>";
         } else {
@@ -49,11 +47,9 @@ class Sites extends BaseController
 
     public function deleteStudent()
     {
-        $sudent_id = 2;
+        $student_Id = 4;
 
-        if($this->table->delete([
-            "id" => $sudent_id
-            ]))
+        if($this->studentObject->delete($student_Id))
         {
             echo "<h3>Student deleted!<h3>";
         } else {
@@ -63,7 +59,7 @@ class Sites extends BaseController
 
     public function selectStudents()
     {
-        $students = $this->table->get()->getResultArray();
+        $students = $this->studentObject->findAll();
 
         echo "<pre>";
 
