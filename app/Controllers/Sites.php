@@ -19,6 +19,7 @@ class Sites extends BaseController
 
     // POST data to database
     // Method POST
+    // potected
     public function saveStudent()
     {
         echo json_encode(array(
@@ -45,5 +46,24 @@ class Sites extends BaseController
             "status" => true,
             "message" => "Delete student API call"
         ));
+    }
+
+    public function login()
+    {
+        $session = session();
+
+        $session->set("isLoggedIn", 1);
+    }
+
+    public function logout()
+    {
+        $session = session();
+
+        $session->remove("isLoggedIn");
+    }
+
+    public function accessDenied()
+    {
+        echo "You are not allowed to access this page.";
     }
 }

@@ -18,7 +18,9 @@ use CodeIgniter\Router\RouteCollection;
 // API ROUTES
 $routes->get("list-students", "Sites::listStudent");
 
-$routes->post("add-student", "Sites::saveStudent");
+$routes->post("add-student", "Sites::saveStudent", [
+  "filter" => "myauth"
+]);
 
 $routes->put("update-student", "Sites::updateStudent");
 
@@ -46,3 +48,8 @@ $routes->group("seller", ["namespace" => "App\Controllers\Seller"], function ($r
   $routes->get("add-product", "SellerController::addPordact");
   $routes->get("add-category", "SellerController::addCategory");
 });
+
+$routes->get("login", "Sites::login");
+$routes->get("logout", "Sites::logout");
+
+$routes->get("access-denied", "Sites::accessDenied");
