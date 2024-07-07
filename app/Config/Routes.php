@@ -23,3 +23,13 @@ $routes->post("add-student", "Sites::saveStudent");
 $routes->put("update-student", "Sites::updateStudent");
 
 $routes->delete("delete-student", "Sites::deleteStudent");
+
+$routes->group("product", function ($routes) {
+  $routes->post("add", "Poduct::addProduct");
+  $routes->get("list", "Poduct::listPoducts");
+});
+
+$routes->group("category", function ($routes) {
+  $routes->get("list", "Category::listCategory");
+  $routes->post("add", "Poduct::addCategory");
+});
