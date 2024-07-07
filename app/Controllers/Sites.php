@@ -7,62 +7,43 @@ use App\Models\StudentModel;
 
 class Sites extends BaseController
 {
-    private $studentObject;
-
-    public function __construct()
+    // List all students from db
+    // Method GET
+    public function listStudent()
     {
-        $this->studentObject = new StudentModel();
-    }
-    public function insertStudent()
-    {
-        $data = [
-            "name" => "Bejak Bartek",
-            "email" => "bejakbartek@vp.pl",
-            "phone" => "987654321",
-        ];
-
-        if($this->studentObject->insert($data))
-        {
-            echo "<h3>Student created!<h3>";
-        } else {
-            echo "<h3>Faild to create Student!<h3>";
-        }
+        echo json_encode(array(
+            "status" => true,
+            "message" => "List of students API call"
+        ));
     }
 
-    public function updateStudent() 
+    // POST data to database
+    // Method POST
+    public function saveStudent()
     {
-        $student_Id = 3;
-
-        $updated_data = [
-            "phone" => "2233445566"
-        ];
-
-        if ($this->studentObject->update($student_Id, $updated_data))
-        {
-            echo "<h3>Student updated!<h3>";
-        } else {
-            echo "<h3>Faild to update sudent</h3>";
-        }
+        echo json_encode(array(
+            "status" => true,
+            "message" => "Save student API call"
+        ));
     }
 
+    // Update data od data base
+    // Method: PUT / PATCH
+    public function updateStudent()
+    {
+        echo json_encode(array(
+            "status" => true,
+            "message" => "Update student API call"
+        ));
+    }
+
+    // Dalete data od data base
+    // Method: DELETE
     public function deleteStudent()
     {
-        $student_Id = 4;
-
-        if($this->studentObject->delete($student_Id))
-        {
-            echo "<h3>Student deleted!<h3>";
-        } else {
-            echo "<h3>Faild to delete sudent</h3>";
-        }
-    }
-
-    public function selectStudents()
-    {
-        $students = $this->studentObject->findAll();
-
-        echo "<pre>";
-
-        print_r($students);
+        echo json_encode(array(
+            "status" => true,
+            "message" => "Delete student API call"
+        ));
     }
 }
